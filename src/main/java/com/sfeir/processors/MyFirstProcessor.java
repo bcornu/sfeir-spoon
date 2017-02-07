@@ -10,9 +10,12 @@ public class MyFirstProcessor extends AbstractProcessor<CtCatch> {
 
     public void process(CtCatch element) {
         if (element.getBody().getStatements().size() == 0) {
-            System.out.print("empty catch: ");
-            System.out.println(element.getPosition());
-            System.out.println(element);
+            //System.out.print("empty catch: ");
+            //System.out.println(element.getPosition());
+            //System.out.println(element);
+            CtCodeSnippetStatement snippet = getFactory().Core().createCodeSnippetStatement();
+            snippet.setValue(element.getParameter().getSimpleName()+".printStackTrace()");
+            element.getBody().addStatement(snippet);
         }
     }
 
